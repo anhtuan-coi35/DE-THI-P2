@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import StepIndicator from './components/StepIndicator';
 import MatrixCreator from './components/MatrixCreator';
@@ -133,6 +133,12 @@ const App: React.FC = () => {
   const [selectedSubject, setSelectedSubject] = useState<Subject>('khoa_hoc_tu_nhien');
   const [selectedGrade, setSelectedGrade] = useState<'6' | '7' | '8' | '9'>('9');
   const [selectedSeries, setSelectedSeries] = useState<TextbookSeries>('canh_dieu');
+
+  useEffect(() => {
+    if (!process.env.API_KEY) {
+      setError('API Key chưa được cấu hình. Để ứng dụng hoạt động, vui lòng thêm biến môi trường API_KEY trong phần cài đặt của Vercel (Settings > Environment Variables) hoặc file .env nếu chạy local.');
+    }
+  }, []);
 
   const handleStepClick = (step: AppStep) => {
     if (step <= maxStep) {

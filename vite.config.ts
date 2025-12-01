@@ -6,7 +6,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      'process.env.API_KEY': JSON.stringify(env.API_KEY),
+      // Sử dụng fallback '' để tránh lỗi undefined khi build hoặc thiếu biến môi trường
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || ''),
     },
   };
 });
